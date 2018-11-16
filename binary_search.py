@@ -1,33 +1,28 @@
-# binary search to guess a number
-def binary_search(linked_list, item):
-    """
-    Low and High keeps Track of which part of the list
-    That is tracked.
-    :param linked_list:
-    :param item:
-    :return:
-    """
-    low = 0  #
-    high = len(linked_list) - 1
+def binary_search(list, item):
+  # low and high keep track of which part of the list you'll search in.
+  low = 0
+  high = len(list) - 1
 
-    while low <= high:  # While you haven't narrowed it down to one element, check the middle.
-        mid = (low + high)
-        guess = linked_list[mid]
-        if guess == item:  # Found the Item
-            return mid
-        if guess > item:  # Guess too High
-            high = mid - 1
-        else:
-            low = mid + 1  # Guess too low
-    return None  # The item is not there
+  # While you haven't narrowed it down to one element ...
+  while low <= high:
+    # ... check the middle element
+    mid = (low + high) // 2
+    guess = list[mid]
+    # Found the item.
+    if guess == item:
+      return mid
+    # The guess was too high.
+    if guess > item:
+      high = mid - 1
+    # The guess was too low.
+    else:
+      low = mid + 1
 
+  # Item doesn't exist
+  return None
 
-result = [1, 2, 3, 4, 5, 8, 9, 18, 32, 50]
-"""
+my_list = [1, 3, 5, 7, 9]
+print(binary_search(my_list, 3)) # => 1
 
-Test Out the Function
-
-"""
-print("Element is present at index", binary_search(result, 50))  # => 9
-
-print("Element is", binary_search(result, -1))  # => Doesn't exist
+# 'None' means nil in Python. We use to indicate that the item wasn't found.
+print(binary_search(my_list, -1)) # => None
